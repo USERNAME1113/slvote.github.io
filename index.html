@@ -7,50 +7,57 @@
 <style>
   /* THEME VARS (DARK & LIGHT MODE) */
   :root{
-    --bg1: #1b1915;
-    --bg2: #3b3222;
-    --card: #0f1720;
-    --accent: #c99a2f; /* gold */
-    --muted: #bfb2a0;
-    --glass: rgba(255,255,255,0.03);
-    --soft: #22201c;
-    --glass-2: rgba(255,255,255,0.02);
-    --text-color: #eee;
-    --header-bg: rgba(11, 11, 11, 0.8);
-    --card-bg-start: rgba(255,255,255,0.02);
+    --bg-start: #121212; /* כהה יותר */
+    --bg-end: #1c1c1c; /* כהה יותר */
+    --card: #1f1f1f;
+    --accent: #FFD700; /* זהב אמיתי יותר */
+    --accent-dark: #ccaa00;
+    --muted: #a0a0a0;
+    --glass: rgba(255,255,255,0.06); /* מעט יותר שקוף */
+    --soft: #282828;
+    --glass-2: rgba(255,255,255,0.04);
+    --text-color: #f5f5f5;
+    --header-bg: rgba(18, 18, 18, 0.9);
+    --card-bg-start: rgba(255,255,255,0.03);
     --card-bg-end: rgba(255,255,255,0.01);
-    --card-border: rgba(255,255,255,0.03);
-    --panel-bg-start: #121212;
-    --panel-bg-end: #0e0e0e;
-    --input-bg: #27272a;
-    --input-border: #3f3f46;
+    --card-border: rgba(255,255,255,0.1); /* גבולות מודגשים יותר */
+    --panel-bg-start: #232323;
+    --panel-bg-end: #181818;
+    --input-bg: #333333;
+    --input-border: #555555;
+    --success: #34d399; /* ירוק חדש */
+    --error: #f87171; /* אדום חדש */
   }
   .light-mode {
-    --bg1: #f0f0f0;
-    --bg2: #e0e0e0;
+    --bg-start: #ffffff;
+    --bg-end: #f0f0f0;
     --card: #ffffff;
-    --accent: #a06e1c; /* darker gold */
-    --muted: #555;
-    --glass: rgba(0,0,0,0.03);
-    --soft: #fff;
-    --glass-2: rgba(0,0,0,0.05);
+    --accent: #a06e1c;
+    --accent-dark: #805817;
+    --muted: #666;
+    --glass: rgba(0,0,0,0.05);
+    --soft: #fcfcfc;
+    --glass-2: rgba(0,0,0,0.08);
     --text-color: #333;
-    --header-bg: rgba(255, 255, 255, 0.9);
-    --card-bg-start: rgba(0,0,0,0.02);
-    --card-bg-end: rgba(0,0,0,0.01);
+    --header-bg: rgba(255, 255, 255, 0.95);
+    --card-bg-start: #ffffff;
+    --card-bg-end: #f9f9f9;
     --card-border: rgba(0,0,0,0.1);
-    --panel-bg-start: #ffffff;
-    --panel-bg-end: #f9f9f9;
-    --input-bg: #fff;
-    --input-border: #ccc;
+    --panel-bg-start: #f8f8f8;
+    --panel-bg-end: #ffffff;
+    --input-bg: #f5f5f5;
+    --input-border: #ddd;
+    --success: #10b981;
+    --error: #ef4444;
   }
 
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
     margin:0;font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    background: radial-gradient(1200px 600px at 10% 10%, rgba(201,154,47,0.06), transparent 10%),
-                linear-gradient(180deg,var(--bg1),var(--bg2));
+    /* רקע חדש - שיפוע עדין יותר */
+    background: radial-gradient(1200px 600px at 10% 10%, rgba(255,215,0,0.08), transparent 10%),
+                linear-gradient(180deg,var(--bg-start),var(--bg-end));
     color:var(--text-color);direction:rtl;
     -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
     transition: background-color 0.3s, color 0.3s;
@@ -62,136 +69,150 @@
     display:flex;align-items:center;justify-content:space-between;padding:16px 28px;
     border-bottom:1px solid var(--card-border);
     background: var(--header-bg);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px); /* בלור חזק יותר */
     position: sticky; top: 0; z-index: 50;
     transition: background-color 0.3s;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3); /* צל חזק יותר */
   }
+  .light-mode header { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
   .brand{display:flex;align-items:center;gap:12px}
   .logo{
-    width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,#3a2b1b,#6b4b27);
-    display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--accent);box-shadow:0 4px 18px rgba(0,0,0,0.6);
-    font-size: 1.6em;
+    width:50px;height:50px;border-radius:12px;background:linear-gradient(135deg,var(--accent-dark), var(--accent));
+    display:flex;align-items:center;justify-content:center;font-weight:900;color:#000;box-shadow:0 6px 20px rgba(255,215,0,0.4);
+    font-size: 1.8em;
     letter-spacing: 2px;
   }
-  h1{font-size:20px;margin:0;color:var(--accent);text-shadow:0 2px 10px rgba(0,0,0,0.2)}
+  h1{font-size:22px;margin:0;color:var(--accent);text-shadow:0 1px 4px rgba(0,0,0,0.4)}
+  .light-mode h1 { text-shadow: none; }
 
   .nav-actions{display:flex;gap:10px;align-items:center}
   .btn{
-    background:transparent;border:1px solid var(--card-border);color:var(--muted);
-    padding:8px 14px;border-radius:10px;cursor:pointer;font-weight:700; transition: all 0.2s;
+    background:var(--glass-2);border:1px solid var(--card-border);color:var(--text-color);
+    padding:10px 16px;border-radius:12px;cursor:pointer;font-weight:600; transition: all 0.25s ease;
     font-size: 15px;
+    backdrop-filter: blur(3px); /* אפקט זכוכית קל לכפתורים */
   }
-  .btn:hover { background: var(--glass); color: var(--text-color); }
+  .btn:hover { background: var(--glass); transform: translateY(-1px); border-color: var(--accent); }
   .btn.primary{
-    background:linear-gradient(90deg,#3f2a12, #6a4a21);border:1px solid rgba(0,0,0,0.4);color:var(--accent);
-    box-shadow:0 6px 18px rgba(0,0,0,0.12);
+    background:linear-gradient(90deg,var(--accent-dark), var(--accent));border:1px solid var(--accent);color:#000;
+    font-weight: 700;
+    box-shadow:0 4px 15px rgba(255,215,0,0.25);
   }
-  .btn.primary:hover { filter: brightness(1.13); }
+  .btn.primary:hover { filter: brightness(1.1); transform: translateY(-2px); box-shadow:0 6px 20px rgba(255,215,0,0.4); }
   .btn.theme {
-    font-size: 1.3em;
-    padding: 6px 10px;
+    font-size: 1.4em;
+    padding: 8px 12px;
   }
 
-  .container{max-width:1180px;margin:28px auto;padding:0 20px}
+  .container{max-width:1200px;margin:35px auto;padding:0 20px} /* רווח גדול יותר */
 
   /* categories grid */
   .grid{
-    display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;
-    margin-top:18px;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:25px;
+    margin-top:25px;
   }
   .cat-card{
-    background:linear-gradient(180deg, var(--card-bg-start), var(--card-bg-end));
-    border:1.5px solid var(--card-border);
-    padding:22px 20px 18px 20px;border-radius:18px;min-height:140px;
+    background:var(--card);
+    border:1px solid var(--card-border);
+    padding:25px 22px 20px 22px;border-radius:20px;min-height:160px;
     display: flex;
     flex-direction: column;
     justify-content: space-between; 
-    box-shadow: 0 10px 30px rgba(0,0,0,0.13);
-    transition:transform .18s ease, box-shadow .18s, border-color 0.3s, background-color 0.3s;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2); /* צל עמוק */
+    transition:transform .25s ease, box-shadow .25s, border-color 0.3s, background-color 0.3s;
     position: relative;
+    backdrop-filter: blur(2px);
   }
-  .cat-card:hover{transform:translateY(-7px) scale(1.01);box-shadow:0 18px 40px rgba(0,0,0,0.18); border-color: var(--accent);}
-  .cat-title{font-weight:800;color:var(--accent);font-size:19px}
-  .cat-desc{color:var(--muted);font-size:15px;margin-top:8px;line-height: 1.5; flex-grow: 1; margin-bottom: 12px;}
+  .cat-card:hover{transform:translateY(-5px) scale(1.005);box-shadow:0 15px 45px rgba(0,0,0,0.3); border-color: var(--accent);}
+  .cat-title{font-weight:900;color:var(--accent);font-size:20px; border-bottom: 2px solid var(--card-border); padding-bottom: 8px;}
+  .cat-desc{color:var(--muted);font-size:16px;margin-top:12px;line-height: 1.6; flex-grow: 1; margin-bottom: 12px;}
   .cat-actions{
     display: flex;
     justify-content: flex-end;
-    margin-top: 10px;
+    margin-top: 15px;
   }
-  .small-btn{background:var(--glass);border:1px solid var(--card-border);color:var(--muted);padding:7px 14px;border-radius:8px;cursor:pointer;font-size:13px; transition:0.2s}
-  .small-btn:hover { background: var(--accent); color: #000; }
+  .small-btn{background:var(--glass-2);border:1px solid var(--card-border);color:var(--muted);padding:8px 16px;border-radius:10px;cursor:pointer;font-size:14px; font-weight: 600; transition:0.2s}
+  .small-btn:hover { background: var(--accent); color: #000; border-color: var(--accent); }
 
   /* search */
-  .search{width: 220px; padding:10px 14px;border-radius:10px;border:1px solid var(--card-border);background:var(--glass-2);color:var(--text-color); transition: background-color 0.3s, border-color 0.3s;}
+  .search{width: 250px; padding:12px 18px;border-radius:12px;border:1px solid var(--card-border);background:var(--input-bg);color:var(--text-color); transition: background-color 0.3s, border-color 0.3s; font-size: 16px;}
+  .search:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 2px rgba(255,215,0,0.2); }
    
   /* voting panel (modal-like area) */
   .panel{
-    margin-top:22px;background:linear-gradient(180deg,var(--panel-bg-start), var(--panel-bg-end));
-    border-radius:18px;padding:28px 24px 24px 24px;border:1.5px solid rgba(201,154,47,0.13);
-    box-shadow:0 20px 50px rgba(0,0,0,0.13);
-    animation: fadeIn 0.3s ease;
+    margin-top:30px;background:linear-gradient(180deg,var(--panel-bg-start), var(--panel-bg-end));
+    border-radius:20px;padding:30px 25px 25px 25px;border:2px solid rgba(255,215,0,0.2);
+    box-shadow:0 20px 60px rgba(0,0,0,0.4);
+    animation: fadeIn 0.4s ease;
     transition: background-color 0.3s;
-    max-width: 700px;
+    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
   }
-  @keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(15px)} to{opacity:1;transform:translateY(0)} }
    
-  .panel-header{display:flex;align-items:center;justify-content:space-between;gap:12px; border-bottom: 1px solid var(--card-border); padding-bottom: 16px;}
-  .panel-title{font-size:23px;color:var(--accent);font-weight:800}
+  .panel-header{display:flex;align-items:center;justify-content:space-between;gap:15px; border-bottom: 1px solid var(--card-border); padding-bottom: 18px;}
+  .panel-title{font-size:26px;color:var(--accent);font-weight:900}
    
-  .candidates-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:20px}
+  .candidates-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-top:25px}
   .cand-card{
     background: var(--soft);
-    border:1.5px solid var(--card-border);padding:18px 14px;border-radius:13px;display:flex;gap:18px;align-items:center;
-    transition: 0.2s;
-    min-height: 80px;
+    border:1px solid var(--card-border);padding:20px;border-radius:15px;display:flex;gap:15px;align-items:center;
+    transition: 0.25s;
+    min-height: 90px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
   }
-  .cand-card:hover { background: var(--glass-2); }
-  .cand-avatar{width:64px;height:64px;border-radius:50%;background:#111;flex-shrink:0;overflow:hidden;border:2px solid var(--card-border)}
+  .cand-card:hover { background: var(--glass); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+  .cand-avatar{width:70px;height:70px;border-radius:50%;background:#111;flex-shrink:0;overflow:hidden;border:3px solid var(--accent-dark)}
   .cand-avatar img{width:100%;height:100%;object-fit:cover;display:block}
   .cand-info{flex:1}
-  .cand-name{font-weight:700;color:var(--text-color);font-size:17px}
-  .cand-desc{color:var(--muted);font-size:13px;margin-top:4px}
+  .cand-name{font-weight:800;color:var(--text-color);font-size:18px}
+  .cand-desc{color:var(--muted);font-size:14px;margin-top:6px}
   .vote-btn{
-    background:var(--glass);color:var(--accent);padding:8px 18px;border-radius:8px;border:1.5px solid var(--accent);
+    background:var(--accent);color:#000;padding:10px 20px;border-radius:10px;border:none;
     font-weight:700;cursor:pointer; transition:0.2s;
-    font-size: 15px;
+    font-size: 16px;
+    box-shadow: 0 3px 10px rgba(255,215,0,0.2);
   }
-  .vote-btn:hover { background: var(--accent); color: var(--panel-bg-start); }
-  .voted-badge { background: #22c55e; color: #000; padding: 4px 10px; border-radius: 4px; font-size: 13px; font-weight: bold; }
+  .vote-btn:hover { background: var(--accent-dark); box-shadow: 0 5px 15px rgba(255,215,0,0.3); }
+  .vote-btn:disabled { background: var(--muted); cursor: not-allowed; box-shadow: none; color: #333; }
+  .voted-badge { background: var(--success); color: #000; padding: 6px 12px; border-radius: 6px; font-size: 14px; font-weight: bold; }
 
   /* admin page */
-  .admin-panel{padding:24px 18px 18px 18px;background:var(--soft);border-radius:13px;border:1.5px solid var(--card-border);margin-top: 24px;}
-  table{width:100%;border-collapse:collapse;font-size:15px; margin-top: 10px;}
-  th,td{padding:10px 8px;text-align:right;border-bottom:1px solid var(--card-border);color:var(--muted)}
-  th{color:var(--accent);font-weight:700}
-  .leader{color: #fbbf24; font-weight: bold;}
-  .admin-user-row { background: var(--glass-2); }
-  .admin-action-btn { font-size: 13px; padding: 4px 10px; margin: 2px; border-radius: 6px; }
+  .admin-panel{padding:30px 25px 25px 25px;background:var(--soft);border-radius:20px;border:1.5px solid var(--card-border);margin-top: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);}
+  table{width:100%;border-collapse:collapse;font-size:16px; margin-top: 15px;}
+  th,td{padding:12px 10px;text-align:right;border-bottom:1px solid var(--input-border);color:var(--text-color)}
+  th{color:var(--accent);font-weight:800; background: var(--panel-bg-start);}
+  .leader{color: var(--accent); font-weight: bold;}
+  .admin-user-row:nth-child(even) { background: var(--glass-2); }
+  .admin-action-btn { font-size: 14px; padding: 6px 12px; margin: 3px; border-radius: 8px; font-weight: 600; }
 
-  footer{margin-top:40px;text-align:center;color:var(--muted);font-size:14px;padding:30px 0; border-top: 1px solid var(--card-border)}
+  footer{margin-top:50px;text-align:center;color:var(--muted);font-size:15px;padding:30px 0; border-top: 1px solid var(--card-border)}
   .hidden { display: none !important; }
 
   /* Auth Modal */
-  .auth-overlay { position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:100;display:none;align-items:center;justify-content:center;backdrop-filter: blur(5px); }
-  .auth-box { width: 100%; max-width: 400px; background: var(--soft); padding: 34px 28px; border-radius: 18px; border: 1.5px solid var(--card-border); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.18); }
-  .auth-input { width: 100%; padding: 13px; margin-bottom: 12px; background: var(--input-bg); border: 1.5px solid var(--input-border); color: var(--text-color); border-radius: 9px; font-size: 15px;}
+  .auth-overlay { position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:100;display:none;align-items:center;justify-content:center;backdrop-filter: blur(8px); }
+  .auth-box { width: 100%; max-width: 450px; background: var(--panel-bg-start); padding: 40px 30px; border-radius: 20px; border: 2px solid var(--accent); box-shadow: 0 30px 60px -12px rgba(0,0,0,0.3); }
+  .auth-input { width: 100%; padding: 15px; margin-bottom: 15px; background: var(--input-bg); border: 1.5px solid var(--input-border); color: var(--text-color); border-radius: 10px; font-size: 16px; transition: border-color 0.2s;}
+  .auth-input:focus { border-color: var(--accent); outline: none; }
    
   @media (max-width:900px){
-    .container { padding: 0 8px; }
-    .panel { padding: 18px 6px; }
-    .admin-panel { padding: 12px 4px; }
+    .container { padding: 0 15px; }
+    .panel { padding: 20px 10px; }
+    .admin-panel { padding: 15px 10px; }
+    th,td { padding: 10px 5px; font-size: 15px; }
   }
   @media (max-width:680px){
     .nav-actions { display: flex; flex-wrap: wrap; gap:8px; align-items:center; justify-content:flex-end; }
     header { flex-direction: column; gap: 10px; align-items:stretch; }
     .search { width: 100%; max-width: 100%; }
-    .container { padding: 0 2px; }
-    .panel { padding: 10px 2px; }
-    .admin-panel { padding: 8px 2px; }
-    .cat-card { padding: 12px 8px; }
+    .container { padding: 0 5px; margin: 20px auto; }
+    .panel { padding: 15px 5px; }
+    .admin-panel { padding: 10px 5px; }
+    .cat-card { padding: 15px 10px; min-height: 140px; }
+    .panel-title { font-size: 22px; }
+    .cand-avatar { width: 60px; height: 60px; }
+    .cand-card { padding: 15px; }
   }
 </style>
 </head>
@@ -226,8 +247,8 @@
       </div>
       <button id="closePanel" class="small-btn" style="margin-right:auto;">סגור</button>
     </div>
-    <div id="voteNote" style="color:#ef4444;font-size:14px;margin-bottom:10px"></div>
-    <div id="candList"></div>
+    <div id="voteNote" style="color:var(--error);font-size:14px;margin-bottom:10px"></div>
+    <div id="candList" class="candidates-list"></div>
   </div>
   <div id="adminArea" class="admin-panel hidden">
     <button id="closeAdmin" class="small-btn" style="float:left;margin-bottom:10px;">סגור</button>
@@ -247,7 +268,7 @@
      
     <input id="authUser" class="auth-input" placeholder="שם משתמש">
     <input id="authPass" class="auth-input" type="password" placeholder="סיסמה">
-    <div id="authMsg" style="color:#ef4444;font-size:13px;margin-bottom:10px;min-height:20px"></div>
+    <div id="authMsg" style="color:var(--error);font-size:13px;margin-bottom:10px;min-height:20px"></div>
      
     <div style="display:flex;gap:10px">
       <button id="doLogin" class="btn primary" style="flex:1">התחבר</button>
@@ -267,8 +288,8 @@ const DATA = [
     candidates: [
       { id:"c1", name:"עידודוד", desc:"עידו המלך מכולם", image:"" },
       { id:"c2", name:"מיכאל", desc:"אחלה גבר", image:"https://yt3.ggpht.com/WkJkhMfCiTKGt0uQo35aqV-uRa2hryLgN2HFbVQVAPMTJNauB9fRzKGLnxtCR26Catfcil-3TA=s600-c-k-c0x00ffffff-no-rj-rp-mo" }, 
-      { id:"c4", name:"ArielHatuka", desc:"גבר גבר וחתיך מעבר", image:"https://yt3.googleusercontent.com/Li6h3QYFl3j_11YXiVnWwNR6IN2zeeRiBQfpvvssUsrQkB9CdaUSlOvn-HpJN6toQObBQOuofw=s160-c-k-c0x00ffffff-no-rj" }, // הוספה לפי בקשה
-      { id:"c5", name:"אוראלרצאבי", desc:"לא ממליץ לריב איתו", image:"" }, // הוספה לפי בקשה
+      { id:"c4", name:"ArielHatuka", desc:"גבר גבר וחתיך מעבר", image:"https://yt3.googleusercontent.com/Li6h3QYFl3j_11YXiVnWwNR6IN2zeeRiBQfpvvssUsrQkB9CdaUSlOvn-HpJN6toQObBQOuofw=s160-c-k-c0x00ffffff-no-rj" }, 
+      { id:"c5", name:"אוראלרצאבי", desc:"לא ממליץ לריב איתו", image:"" }, 
       { id:"c3", name:"נתנאל", desc:"חמוד קטן", image:"https://upload.wikimedia.org/wikipedia/commons/7/7e/Roblox_Logo_2022.jpg" }
     ]
   },
@@ -278,7 +299,7 @@ const DATA = [
       { id:"c4", name:"ArielHatuka", desc:"גבר גבר וחתיך מעבר", image:"https://yt3.googleusercontent.com/Li6h3QYFl3j_11YXiVnWwNR6IN2zeeRiBQfpvvssUsrQkB9CdaUSlOvn-HpJN6toQObBQOuofw=s160-c-k-c0x00ffffff-no-rj" },
       { id:"c5", name:"אוראלרצאבי", desc:"אומרים שלא כדי לריב איתו", image:"" },
       { id:"c1", name:"עידודוד", desc:"עידו המלך מכולם", image:"" },
-      { id:"c2", name:"מיכאל", desc:"הכי מלך בצ'אט השנה", image:"https://yt3.ggpht.com/WkJkhMfCiTKGt0uQo35aqV-uRa2hryLgN2HFbVQVAPMTJNauB9fRzKGLnxtCR26Catfcil-3TA=s600-c-k-c0x00ffffff-no-rj-rp-mo" }, // הוספה לפי בקשה
+      { id:"c2", name:"מיכאל", desc:"הכי מלך בצ'אט השנה", image:"https://yt3.ggpht.com/WkJkhMfCiTKGt0uQo35aqV-uRa2hryLgN2HFbVQVAPMTJNauB9fRzKGLnxtCR26Catfcil-3TA=s600-c-k-c0x00ffffff-no-rj-rp-mo" }, 
       { id:"c6", name:"NoamB221", desc:"תמיד בלייב?!?!?", image:"" },
       { id:"c7", name:"eden football", desc:"ספק מלך", image:"" }
     ]
@@ -387,7 +408,7 @@ function renderCategories(filter=""){
     
     const card = document.createElement("div");
     card.className = "cat-card";
-    card.style.borderColor = userVoted ? "#22c55e" : "";
+    card.style.borderColor = userVoted ? "var(--success)" : "var(--card-border)";
     
     card.innerHTML = `
       <div>
@@ -418,7 +439,7 @@ function openCategory(catId){
   
   if(!currentUser) {
     document.getElementById("voteNote").innerText = "עליך להתחבר כדי להצביע";
-    document.getElementById("voteNote").style.color = "#ef4444";
+    document.getElementById("voteNote").style.color = "var(--error)";
   } else {
     document.getElementById("voteNote").innerText = "";
   }
@@ -435,9 +456,9 @@ function renderCandidates(){
     const isSelected = userVotedId === c.id;
     const div = document.createElement("div");
     div.className = "cand-card";
-    if(isSelected) div.style.borderColor = "#22c55e";
+    if(isSelected) div.style.borderColor = "var(--success)";
     
-    const imgUrl = c.image || `https://ui-avatars.com/api/?name=${c.name}&background=random&color=fff&size=64`;
+    const imgUrl = c.image || `https://ui-avatars.com/api/?name=${c.name}&background=random&color=fff&size=70`;
 
     div.innerHTML = `
       <div class="cand-avatar"><img src="${imgUrl}"></div>
@@ -453,9 +474,12 @@ function renderCandidates(){
       </div>
     `;
     if(isLocked && !isSelected) {
-        div.querySelector('.vote-btn').disabled = true;
-        div.querySelector('.vote-btn').style.opacity = '0.5';
-        div.querySelector('.vote-btn').style.cursor = 'not-allowed';
+        const voteBtn = div.querySelector('.vote-btn');
+        if (voteBtn) {
+            voteBtn.disabled = true;
+            voteBtn.style.opacity = '0.5';
+            voteBtn.style.cursor = 'not-allowed';
+        }
     }
     
     els.candList.appendChild(div);
@@ -554,12 +578,14 @@ document.getElementById("doLogin").onclick = () => handleAuth('login');
 function updateAuthUI(){
   if(currentUser) {
     els.btnAuth.innerText = `מחובר: ${currentUser}`;
-    els.btnAuth.style.borderColor = "#22c55e";
-    els.btnAuth.style.color = "#22c55e";
+    els.btnAuth.style.borderColor = "var(--success)";
+    els.btnAuth.style.color = "var(--success)";
+    els.btnAuth.style.background = "var(--glass-2)";
   } else {
     els.btnAuth.innerText = "התחברות";
     els.btnAuth.style.borderColor = "";
     els.btnAuth.style.color = "";
+    els.btnAuth.style.background = "";
   }
 }
 
@@ -598,7 +624,7 @@ function openAdminPanel(){
     const sorted = [...cat.candidates].sort((a,b) => votes[cat.id][b.id] - votes[cat.id][a.id]);
     const total = Object.values(votes[cat.id]).reduce((a,b)=>a+b,0);
     
-    html += `<h3 style="color:var(--accent);margin-bottom:5px;border-bottom:1px solid #333;padding-bottom:5px">${cat.title} (סה"כ קולות: ${total})</h3>`;
+    html += `<h3 style="color:var(--accent);margin-bottom:5px;border-bottom:1px solid var(--input-border);padding-bottom:5px">${cat.title} (סה"כ קולות: ${total})</h3>`;
     html += `<table><thead><tr><th>מקום</th><th>שם מועמד</th><th>קולות</th></tr></thead><tbody>`;
     
     sorted.forEach((c, idx) => {
@@ -627,8 +653,8 @@ function openAdminPanel(){
               if (user.voted[catId]) {
                   const cand = cat?.candidates.find(c => c.id === user.voted[catId]);
                   return `
-                    ${cat.title}: ${cand ? cand.name : 'לא נמצא'} 
-                    <button class="small-btn admin-action-btn" onclick="resetUserVote('${username}', '${catId}')" style="background:#dc2626;color:#fff;">
+                    <strong>${cat.title}:</strong> ${cand ? cand.name : 'לא נמצא'} 
+                    <button class="small-btn admin-action-btn" onclick="resetUserVote('${username}', '${catId}')" style="background:var(--error);color:#fff;">
                       הסר הצבעה
                     </button>
                   `;
@@ -642,9 +668,9 @@ function openAdminPanel(){
       html += `<tr class="admin-user-row">
         <td>${username}</td>
         <td>${user.isAdmin ? 'אדמין' : 'רגיל'}</td>
-        <td style="font-size:12px;">${votesDetail}</td>
+        <td style="font-size:14px;">${votesDetail}</td>
         <td>
-          <button class="small-btn admin-action-btn" onclick="deleteUser('${username}')" style="background:#ef4444;color:#fff;">
+          <button class="small-btn admin-action-btn" onclick="deleteUser('${username}')" style="background:var(--error);color:#fff;">
             מחק משתמש
           </button>
         </td>
@@ -683,6 +709,7 @@ window.deleteUser = (username) => {
         }
         saveAll();
         openAdminPanel();
+        renderCategories();
         alert(`משתמש ${username} נמחק.`);
     }
 };
