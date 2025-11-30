@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>צאטר השנה SL</title>
+<style>
+  /* THEME VARS (DARK & LIGHT MODE) */
+  :root{
+    --bg1: #1b1915;
+    --bg2: #3b3222;
+    --card: #0f1720;
+    --accent: #c99a2f; /* gold */
+    --muted: #bfb2a0;
+    --glass: rgba(255,255,255,0.03);
+    --soft: #22201c;
+    --glass-2: rgba(255,255,255,0.02);
+    --text-color: #eee;
+    --header-bg: rgba(11, 11, 11, 0.8);
+    --card-bg-start: rgba(255,255,255,0.02);
+    --card-bg-end: rgba(255,255,255,0.01);
+    --card-border: rgba(255,255,255,0.03);
+    --panel-bg-start: #121212;
+    --panel-bg-end: #0e0e0e;
+    --input-bg: #27272a;
+    --input-border: #3f3f46;
+  }
+  .light-mode {
+    --bg1: #f0f0f0;
+    --bg2: #e0e0e0;
+    --card: #ffffff;
+    --accent: #a06e1c; /* darker gold */
+    --muted: #555;
+    --glass: rgba(0,0,0,0.03);
+    --soft: #fff;
+    --glass-2: rgba(0,0,0,0.05);
+    --text-color: #333;
+    --header-bg: rgba(255, 255, 255, 0.9);
+    --card-bg-start: rgba(0,0,0,0.02);
+    --card-bg-end: rgba(0,0,0,0.01);
+    --card-border: rgba(0,0,0,0.1);
+    --panel-bg-start: #ffffff;
+    --panel-bg-end: #f9f9f9;
+    --input-bg: #fff;
+    --input-border: #ccc;
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: radial-gradient(1200px 600px at 10% 10%, rgba(201,154,47,0.06), transparent 10%),
+                linear-gradient(180deg,var(--bg1),var(--bg2));
+    color:var(--text-color);direction:rtl;
+    -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+    transition: background-color 0.3s, color 0.3s;
+    min-height: 100vh;
+  }
+
+  /* top nav */
+  header{
+    display:flex;align-items:center;justify-content:space-between;padding:16px 28px;
+    border-bottom:1px solid var(--card-border);
+    background: var(--header-bg);
+    backdrop-filter: blur(10px);
+    position: sticky; top: 0; z-index: 50;
+    transition: background-color 0.3s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+  .brand{display:flex;align-items:center;gap:12px}
+  .logo{
+    width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,#3a2b1b,#6b4b27);
+    display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--accent);box-shadow:0 4px 18px rgba(0,0,0,0.6);
+    font-size: 1.6em;
+    letter-spacing: 2px;
+  }
+  h1{font-size:20px;margin:0;color:var(--accent);text-shadow:0 2px 10px rgba(0,0,0,0.2)}
+
+  .nav-actions{display:flex;gap:10px;align-items:center}
+  .btn{
+    background:transparent;border:1px solid var(--card-border);color:var(--muted);
+    padding:8px 14px;border-radius:10px;cursor:pointer;font-weight:700; transition: all 0.2s;
+    font-size: 15px;
+  }
+  .btn:hover { background: var(--glass); color: var(--text-color); }
+  .btn.primary{
+    background:linear-gradient(90deg,#3f2a12, #6a4a21);border:1px solid rgba(0,0,0,0.4);color:var(--accent);
+    box-shadow:0 6px 18px rgba(0,0,0,0.12);
+  }
+  .btn.primary:hover { filter: brightness(1.13); }
+  .btn.theme {
+    font-size: 1.3em;
+    padding: 6px 10px;
+  }
+
+  .container{max-width:1180px;margin:28px auto;padding:0 20px}
+
+  /* categories grid */
+  .grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;
+    margin-top:18px;
+  }
+  .cat-card{
+    background:linear-gradient(180deg, var(--card-bg-start), var(--card-bg-end));
+    border:1.5px solid var(--card-border);
+    padding:22px 20px 18px 20px;border-radius:18px;min-height:140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.13);
+    transition:transform .18s ease, box-shadow .18s, border-color 0.3s, background-color 0.3s;
+    position: relative;
+  }
+  .cat-card:hover{transform:translateY(-7px) scale(1.01);box-shadow:0 18px 40px rgba(0,0,0,0.18); border-color: var(--accent);}
+  .cat-title{font-weight:800;color:var(--accent);font-size:19px}
+  .cat-desc{color:var(--muted);font-size:15px;margin-top:8px;line-height: 1.5; flex-grow: 1; margin-bottom: 12px;}
+  .cat-actions{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+  }
+  .small-btn{background:var(--glass);border:1px solid var(--card-border);color:var(--muted);padding:7px 14px;border-radius:8px;cursor:pointer;font-size:13px; transition:0.2s}
+  .small-btn:hover { background: var(--accent); color: #000; }
+
+  /* search */
+  .search{width: 220px; padding:10px 14px;border-radius:10px;border:1px solid var(--card-border);background:var(--glass-2);color:var(--text-color); transition: background-color 0.3s, border-color 0.3s;}
+   
+  /* voting panel (modal-like area) */
+  .panel{
+    margin-top:22px;background:linear-gradient(180deg,var(--panel-bg-start), var(--panel-bg-end));
+    border-radius:18px;padding:28px 24px 24px 24px;border:1.5px solid rgba(201,154,47,0.13);
+    box-shadow:0 20px 50px rgba(0,0,0,0.13);
+    animation: fadeIn 0.3s ease;
+    transition: background-color 0.3s;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+   
+  .panel-header{display:flex;align-items:center;justify-content:space-between;gap:12px; border-bottom: 1px solid var(--card-border); padding-bottom: 16px;}
+  .panel-title{font-size:23px;color:var(--accent);font-weight:800}
+   
+  .candidates-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:20px}
+  .cand-card{
+    background: var(--soft);
+    border:1.5px solid var(--card-border);padding:18px 14px;border-radius:13px;display:flex;gap:18px;align-items:center;
+    transition: 0.2s;
+    min-height: 80px;
+  }
+  .cand-card:hover { background: var(--glass-2); }
+  .cand-avatar{width:64px;height:64px;border-radius:50%;background:#111;flex-shrink:0;overflow:hidden;border:2px solid var(--card-border)}
+  .cand-avatar img{width:100%;height:100%;object-fit:cover;display:block}
+  .cand-info{flex:1}
+  .cand-name{font-weight:700;color:var(--text-color);font-size:17px}
+  .cand-desc{color:var(--muted);font-size:13px;margin-top:4px}
+  .vote-btn{
+    background:var(--glass);color:var(--accent);padding:8px 18px;border-radius:8px;border:1.5px solid var(--accent);
+    font-weight:700;cursor:pointer; transition:0.2s;
+    font-size: 15px;
+  }
+  .vote-btn:hover { background: var(--accent); color: var(--panel-bg-start); }
+  .voted-badge { background: #22c55e; color: #000; padding: 4px 10px; border-radius: 4px; font-size: 13px; font-weight: bold; }
+
+  /* admin page */
+  .admin-panel{padding:24px 18px 18px 18px;background:var(--soft);border-radius:13px;border:1.5px solid var(--card-border);margin-top: 24px;}
+  table{width:100%;border-collapse:collapse;font-size:15px; margin-top: 10px;}
+  th,td{padding:10px 8px;text-align:right;border-bottom:1px solid var(--card-border);color:var(--muted)}
+  th{color:var(--accent);font-weight:700}
+  .leader{color: #fbbf24; font-weight: bold;}
+  .admin-user-row { background: var(--glass-2); }
+  .admin-action-btn { font-size: 13px; padding: 4px 10px; margin: 2px; border-radius: 6px; }
+
+  footer{margin-top:40px;text-align:center;color:var(--muted);font-size:14px;padding:30px 0; border-top: 1px solid var(--card-border)}
+  .hidden { display: none !important; }
+
+  /* Auth Modal */
+  .auth-overlay { position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:100;display:none;align-items:center;justify-content:center;backdrop-filter: blur(5px); }
+  .auth-box { width: 100%; max-width: 400px; background: var(--soft); padding: 34px 28px; border-radius: 18px; border: 1.5px solid var(--card-border); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.18); }
+  .auth-input { width: 100%; padding: 13px; margin-bottom: 12px; background: var(--input-bg); border: 1.5px solid var(--input-border); color: var(--text-color); border-radius: 9px; font-size: 15px;}
+   
+  @media (max-width:900px){
+    .container { padding: 0 8px; }
+    .panel { padding: 18px 6px; }
+    .admin-panel { padding: 12px 4px; }
+  }
+  @media (max-width:680px){
+    .nav-actions { display: flex; flex-wrap: wrap; gap:8px; align-items:center; justify-content:flex-end; }
+    header { flex-direction: column; gap: 10px; align-items:stretch; }
+    .search { width: 100%; max-width: 100%; }
+    .container { padding: 0 2px; }
+    .panel { padding: 10px 2px; }
+    .admin-panel { padding: 8px 2px; }
+    .cat-card { padding: 12px 8px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <div class="logo">SL</div>
+    <div>
+      <h1>מי צאטר השנה SL </h1>
+      <div style="font-size:13px;color:var(--muted)">מערכת הצבעות שנתית</div>
+    </div>
+  </div>
+
+  <div class="nav-actions">
+    <input id="searchInput" class="search" placeholder="חפש קטגוריה..." />
+    <button id="btnTheme" class="btn theme">☀️</button>
+    <button id="btnAuth" class="btn primary">התחברות</button>
+    <button id="btnAdmin" class="btn">ניהול</button>
+  </div>
+</header>
+
+<div class="container">
+   
+  <div id="catsGrid" class="grid"></div>
+
+  <div id="votePanel" class="panel hidden">
+    <div class="panel-header">
+      <div>
+        <div class="panel-title" id="panelTitle"></div>
+        <div id="panelDesc" style="color:var(--muted);font-size:15px;margin-top:4px"></div>
+      </div>
+      <button id="closePanel" class="small-btn" style="margin-right:auto;">סגור</button>
+    </div>
+    <div id="voteNote" style="color:#ef4444;font-size:14px;margin-bottom:10px"></div>
+    <div id="candList"></div>
+  </div>
+  <div id="adminArea" class="admin-panel hidden">
+    <button id="closeAdmin" class="small-btn" style="float:left;margin-bottom:10px;">סגור</button>
+    <button id="resetVotesBtn" class="small-btn" style="background:#fbbf24;color:#000;margin-bottom:10px;">אפס את כל ההצבעות</button>
+    <div id="adminContent"></div>
+  </div>
+
+  <footer>
+    © SL Awards 2024 • כל הזכויות שמורות • נבנה עבור הקהילה
+  </footer>
+</div>
+
+<div id="authModal" class="auth-overlay">
+  <div class="auth-box">
+    <h2 style="margin-top:0;color:var(--accent)">כניסה למערכת</h2>
+    <p style="color:var(--muted);font-size:14px;margin-bottom:20px">יש להתחבר או להירשם כדי להצביע. הסיסמה נשמרת באופן מקומי.</p>
+     
+    <input id="authUser" class="auth-input" placeholder="שם משתמש">
+    <input id="authPass" class="auth-input" type="password" placeholder="סיסמה">
+    <div id="authMsg" style="color:#ef4444;font-size:13px;margin-bottom:10px;min-height:20px"></div>
+     
+    <div style="display:flex;gap:10px">
+      <button id="doLogin" class="btn primary" style="flex:1">התחבר</button>
+      <button id="doRegister" class="btn" style="flex:1">הירשם</button>
+    </div>
+    <div style="margin-top:15px;text-align:center;">
+        <button id="closeAuth" class="small-btn">סגור</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* DATA CONFIGURATION - FINAL AND CORRECTED */
+const DATA = [
+  { 
+    id: "cat_funny", title: "הכי מצחיק", desc: "מי הכי מצחיק בצ'אט השנה?", 
+    candidates: [
+      { id:"c1", name:"עידודוד", desc:"עידו המלך מכולם", image:"" },
+      { id:"c2", name:"מיכאל", desc:"אחלה גבר", image:"https://yt3.ggpht.com/WkJkhMfCiTKGt0uQo35aqV-uRa2hryLgN2HFbVQVAPMTJNauB9fRzKGLnxtCR26Catfcil-3TA=s600-c-k-c0x00ffffff-no-rj-rp-mo" }, 
+      { id:"c4", name:"ArielHatuka", desc:"גבר גבר וחתיך מעבר", image:"https://yt3.googleusercontent.com/Li6h3QYFl3j_11YXiVnWwNR6IN2zeeRiBQfpvvssUsrQkB9CdaUSlOvn-HpJN6toQObBQOuofw=s160-c-k-c0x00ffffff-no-rj" }, // הוספה לפי בקשה
+      { id:"c5", name:"אוראלרצאבי", desc:"לא ממליץ לריב איתו", image:"" }, // הוספה לפי בקשה
+      { id:"c3", name:"נתנאל", desc:"חמוד קטן", image:"https://upload.wikimedia.org/wikipedia/commons/7/7e/Roblox_Logo_2022.jpg" }
+    ]
+  },
+  { 
+    id: "cat_king", title: "הכי מלך", desc: "מי המלך של השנה?", 
+    candidates: [
+      { id:"c4", name:"ArielHatuka", desc:"גבר גבר וחתיך מעבר", image:"https://yt3.googleusercontent.com/Li6h3QYFl3j_11YXiVnWwNR6IN2zeeRiBQfpvvssUsrQkB9CdaUSlOvn-HpJN6toQObBQOuofw=s160-c-k-c0x00ffffff-no-rj" },
+      { id:"c5", name:"אוראלרצאבי", desc:"אומרים שלא כדי לריב איתו", image:"" },
+      { id:"c1", name:"עידודוד", desc:"עידו המלך מכולם", image:"" },
+      { id:"c2", name:"מיכאל", desc:"הכי מלך בצ'אט השנה", image:"https://yt3.ggpht.com/WkJkhMfCiTKGt0uQo35aqV-uRa2hryLgN2HFbVQVAPMTJNauB9fRzKGLnxtCR26Catfcil-3TA=s600-c-k-c0x00ffffff-no-rj-rp-mo" }, // הוספה לפי בקשה
+      { id:"c6", name:"NoamB221", desc:"תמיד בלייב?!?!?", image:"" },
+      { id:"c7", name:"eden football", desc:"ספק מלך", image:"" }
+    ]
+  },
+  { 
+    id: "cat_fight", title: "ריב השנה", desc: "האירוע הדרמטי של השנה", 
+    candidates: [
+      { id:"f1", name:"אוראלרצאבי vs הצ'אט", desc:"תמיד רב אבל תמיד נשאר המלך מכולם ", image:"" },
+      { id:"f2", name:"מיכאל ועידו vs נתנאל", desc:"ריב בדיסקורד אומרים שעד היום לא נגמר", image:"https://yt3.ggpht.com/WkJkhMfCiTKGt0uQo35aqV-uRa2hryLgN2HFbVQVAPMTJNauB9fRzKGLnxtCR26Catfcil-3TA=s600-c-k-c0x00ffffff-no-rj-rp-mo" }, 
+      { id:"f3", name:"SL מתעצבן", desc:"בעיקרון לא כדי כי אחרי זה תקבל באן...", image:"https://yt3.googleusercontent.com/LOfXo_Zd02pBNHcBO-7fGP4GAs0aeqF6HADBRY_zA8f7FxX_h7gpcQy-mxcHktx1X0h-cMOpHIg=s72-c-k-c0x00ffffff-no-rj" } 
+    ]
+  }
+];
+
+// --- CONSTANTS ---
+const ADMIN_PASSCODE = "ADMINSL"; 
+const ADMIN_USERNAME = "admin";
+const LS_USERS = "sl_users_v2";
+const LS_VOTES = "sl_votes_v2";
+const LS_CURRENT = "sl_current_v2";
+const LS_THEME = "sl_theme";
+
+// --- STATE ---
+let users = JSON.parse(localStorage.getItem(LS_USERS) || "{}");
+let votes = JSON.parse(localStorage.getItem(LS_VOTES) || "{}");
+let currentUser = localStorage.getItem(LS_CURRENT) || null;
+let currentTheme = localStorage.getItem(LS_THEME) || 'dark';
+
+
+// --- Initialization Functions ---
+
+function initVotesStructure() {
+    // 1. Ensure Admin User exists in storage for future logins
+    if (!users[ADMIN_USERNAME]) {
+        users[ADMIN_USERNAME] = { pass: ADMIN_PASSCODE, voted: {}, isAdmin: true };
+    }
+
+    // 2. Setup Vote Structure
+    DATA.forEach(cat => {
+        if (!votes[cat.id]) votes[cat.id] = {};
+        const validIds = new Set(cat.candidates.map(c => c.id));
+        
+        // Cleanup old votes 
+        Object.keys(votes[cat.id]).forEach(candId => {
+            if (!validIds.has(candId)) {
+                delete votes[cat.id][candId];
+            }
+        });
+
+        // Initialize new candidates
+        cat.candidates.forEach(c => {
+            if (votes[cat.id][c.id] === undefined) votes[cat.id][c.id] = 0;
+        });
+    });
+}
+
+function saveAll(){
+    localStorage.setItem(LS_USERS, JSON.stringify(users));
+    localStorage.setItem(LS_VOTES, JSON.stringify(votes));
+}
+
+// --- Theme Toggling ---
+const btnTheme = document.getElementById("btnTheme");
+
+function applyTheme(theme) {
+    document.body.classList.remove('light-mode');
+    if (theme === 'light') {
+        document.body.classList.add('light-mode');
+        btnTheme.innerText = '🌙';
+    } else {
+        btnTheme.innerText = '☀️';
+    }
+    localStorage.setItem(LS_THEME, theme);
+    currentTheme = theme;
+}
+
+btnTheme.onclick = () => {
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    applyTheme(newTheme);
+};
+
+
+// --- UI Elements ---
+const els = {
+  grid: document.getElementById("catsGrid"),
+  votePanel: document.getElementById("votePanel"),
+  candList: document.getElementById("candList"),
+  authModal: document.getElementById("authModal"),
+  authMsg: document.getElementById("authMsg"),
+  adminArea: document.getElementById("adminArea"),
+  adminContent: document.getElementById("adminContent"),
+  btnAuth: document.getElementById("btnAuth"),
+  searchInput: document.getElementById("searchInput")
+};
+
+// --- RENDER FUNCTIONS ---
+
+function renderCategories(filter=""){
+  els.grid.innerHTML = "";
+  const f = filter.toLowerCase();
+  
+  DATA.forEach(cat => {
+    if(f && !cat.title.toLowerCase().includes(f)) return;
+    
+    const userVoted = currentUser && users[currentUser] && users[currentUser].voted && users[currentUser].voted[cat.id];
+    
+    const card = document.createElement("div");
+    card.className = "cat-card";
+    card.style.borderColor = userVoted ? "#22c55e" : "";
+    
+    card.innerHTML = `
+      <div>
+        <div class="cat-title">${cat.title} ${userVoted ? '✅' : ''}</div>
+        <div class="cat-desc">${cat.desc}</div>
+      </div>
+      <div class="cat-actions">
+        <button class="small-btn" onclick="openCategory('${cat.id}')">
+          ${userVoted ? 'צפה בבחירה' : 'הצבע עכשיו'}
+        </button>
+      </div>
+    `;
+    els.grid.appendChild(card);
+  });
+}
+
+let activeCategory = null;
+function openCategory(catId){
+  activeCategory = DATA.find(c => c.id === catId);
+  if(!activeCategory) return;
+  
+  els.votePanel.classList.remove("hidden");
+  els.adminArea.classList.add("hidden");
+  document.getElementById("panelTitle").innerText = activeCategory.title;
+  document.getElementById("panelDesc").innerText = activeCategory.desc;
+  
+  renderCandidates();
+  
+  if(!currentUser) {
+    document.getElementById("voteNote").innerText = "עליך להתחבר כדי להצביע";
+    document.getElementById("voteNote").style.color = "#ef4444";
+  } else {
+    document.getElementById("voteNote").innerText = "";
+  }
+  
+  window.scrollTo({ top: els.votePanel.offsetTop - 100, behavior: 'smooth' });
+}
+
+function renderCandidates(){
+  els.candList.innerHTML = "";
+  const userVotedId = (currentUser && users[currentUser]?.voted[activeCategory.id]) || null;
+  const isLocked = userVotedId !== null;
+  
+  activeCategory.candidates.forEach(c => {
+    const isSelected = userVotedId === c.id;
+    const div = document.createElement("div");
+    div.className = "cand-card";
+    if(isSelected) div.style.borderColor = "#22c55e";
+    
+    const imgUrl = c.image || `https://ui-avatars.com/api/?name=${c.name}&background=random&color=fff&size=64`;
+
+    div.innerHTML = `
+      <div class="cand-avatar"><img src="${imgUrl}"></div>
+      <div class="cand-info">
+        <div class="cand-name">${c.name}</div>
+        <div class="cand-desc">${c.desc}</div>
+      </div>
+      <div>
+        ${isSelected 
+          ? '<span class="voted-badge">הבחירה שלך</span>' 
+          : `<button class="vote-btn" onclick="vote('${c.id}')">בחר</button>`
+        }
+      </div>
+    `;
+    if(isLocked && !isSelected) {
+        div.querySelector('.vote-btn').disabled = true;
+        div.querySelector('.vote-btn').style.opacity = '0.5';
+        div.querySelector('.vote-btn').style.cursor = 'not-allowed';
+    }
+    
+    els.candList.appendChild(div);
+  });
+}
+
+// --- CORE ACTIONS ---
+
+function vote(candId){
+  if(!currentUser) {
+    els.authModal.style.display = "flex";
+    return;
+  }
+
+  if(users[currentUser].voted[activeCategory.id]) {
+    alert("כבר הצבעת בקטגוריה זו. לא ניתן לשנות הצבעה.");
+    return;
+  }
+  
+  if(confirm("האם אתה בטוח שזו הבחירה שלך? לא ניתן לשנות הצבעה.")){
+    votes[activeCategory.id][candId]++;
+    users[currentUser].voted[activeCategory.id] = candId;
+    saveAll();
+    renderCandidates();
+    renderCategories(); 
+    alert("הצבעתך נקלטה!");
+  }
+}
+
+// --- AUTH LOGIC (Login, Register, Logout) ---
+
+document.getElementById("btnAuth").onclick = () => {
+  if(currentUser) {
+    // LOGOUT LOGIC (התנתקות)
+    if(confirm(`האם להתנתק מהחשבון ${currentUser}?`)) {
+      currentUser = null;
+      localStorage.removeItem(LS_CURRENT);
+      updateAuthUI();
+      renderCategories();
+      els.votePanel.classList.add("hidden");
+      els.adminArea.classList.add("hidden"); // Hide admin panel on logout
+    }
+  } else {
+    // OPEN LOGIN MODAL (פתיחת חלון כניסה)
+    els.authModal.style.display = "flex";
+    els.authMsg.innerText = "";
+    document.getElementById("authUser").value = "";
+    document.getElementById("authPass").value = "";
+  }
+};
+
+document.getElementById("closeAuth").onclick = () => els.authModal.style.display = "none";
+
+function handleAuth(type) {
+    const u = document.getElementById("authUser").value.trim();
+    const p = document.getElementById("authPass").value.trim();
+    els.authMsg.innerText = "";
+    
+    if(!u || !p) return els.authMsg.innerText = "נא למלא את כל השדות";
+    
+    let isLoginSuccessful = false;
+
+    if (type === 'register') {
+        // REGISTER LOGIC (הרשמה)
+        if(users[u]) return els.authMsg.innerText = "שם המשתמש תפוס";
+        users[u] = { pass: p, voted: {}, isAdmin: false };
+        isLoginSuccessful = true;
+    } else if (type === 'login') {
+        // LOGIN LOGIC (כניסה)
+        if (u === ADMIN_USERNAME && p === ADMIN_PASSCODE) {
+            // Admin login
+            users[u] = users[u] || { pass: ADMIN_PASSCODE, voted: {}, isAdmin: true };
+            isLoginSuccessful = true;
+        } else if(users[u] && users[u].pass === p) {
+            // Regular user login
+            isLoginSuccessful = true;
+        }
+        
+        if (!isLoginSuccessful) return els.authMsg.innerText = "פרטים שגויים";
+    }
+
+    if (isLoginSuccessful) {
+        currentUser = u;
+        localStorage.setItem(LS_CURRENT, u); // שמירה להתחברות קבועה
+        saveAll();
+        els.authModal.style.display = "none";
+        updateAuthUI();
+        renderCategories();
+        if(activeCategory) renderCandidates();
+    }
+}
+
+document.getElementById("doRegister").onclick = () => handleAuth('register');
+document.getElementById("doLogin").onclick = () => handleAuth('login');
+
+function updateAuthUI(){
+  if(currentUser) {
+    els.btnAuth.innerText = `מחובר: ${currentUser}`;
+    els.btnAuth.style.borderColor = "#22c55e";
+    els.btnAuth.style.color = "#22c55e";
+  } else {
+    els.btnAuth.innerText = "התחברות";
+    els.btnAuth.style.borderColor = "";
+    els.btnAuth.style.color = "";
+  }
+}
+
+// --- ADMIN LOGIC ---
+
+document.getElementById("btnAdmin").onclick = () => {
+    // If user is already logged in as Admin, open directly
+    if(currentUser && users[currentUser]?.isAdmin) {
+        openAdminPanel();
+        return;
+    }
+    
+    // Prompt for the ADMIN_PASSCODE
+    const pass = prompt("סיסמת ניהול:");
+    if(pass === ADMIN_PASSCODE) {
+        // Log in the admin user automatically upon successful code entry
+        currentUser = ADMIN_USERNAME;
+        localStorage.setItem(LS_CURRENT, ADMIN_USERNAME);
+        users[ADMIN_USERNAME] = users[ADMIN_USERNAME] || { pass: ADMIN_PASSCODE, voted: {}, isAdmin: true };
+        saveAll();
+        updateAuthUI();
+        openAdminPanel();
+    } else {
+        alert("גישה נדחתה. נדרש קוד סודי.");
+    }
+};
+
+function openAdminPanel(){
+  els.votePanel.classList.add("hidden");
+  els.adminArea.classList.remove("hidden");
+  
+  let html = `<h2 style="color:var(--accent)">תוצאות קטגוריות</h2>`;
+  
+  // 1. Category Results
+  DATA.forEach(cat => {
+    const sorted = [...cat.candidates].sort((a,b) => votes[cat.id][b.id] - votes[cat.id][a.id]);
+    const total = Object.values(votes[cat.id]).reduce((a,b)=>a+b,0);
+    
+    html += `<h3 style="color:var(--accent);margin-bottom:5px;border-bottom:1px solid #333;padding-bottom:5px">${cat.title} (סה"כ קולות: ${total})</h3>`;
+    html += `<table><thead><tr><th>מקום</th><th>שם מועמד</th><th>קולות</th></tr></thead><tbody>`;
+    
+    sorted.forEach((c, idx) => {
+      const cnt = votes[cat.id][c.id] || 0;
+      html += `<tr>
+        <td>${idx+1}</td>
+        <td>${c.name} ${idx===0 && cnt>0 ? '👑' : ''}</td>
+        <td>${cnt}</td>
+      </tr>`;
+    });
+    html += `</tbody></table><br>`;
+  });
+  
+  // 2. User Management and Individual Votes
+  html += `<h2 style="color:var(--accent);margin-top:20px;">ניהול משתמשים והצבעות</h2>`;
+  html += `<table><thead><tr><th>משתמש</th><th>הרשאה</th><th>הצבעות</th><th>פעולות</th></tr></thead><tbody>`;
+  
+  Object.keys(users).forEach(username => {
+      const user = users[username];
+      const votedCategories = Object.keys(user.voted).filter(catId => user.voted[catId]).length;
+      
+      let votesDetail = '';
+      if (votedCategories > 0) {
+          votesDetail = Object.keys(user.voted).map(catId => {
+              const cat = DATA.find(d => d.id === catId);
+              if (user.voted[catId]) {
+                  const cand = cat?.candidates.find(c => c.id === user.voted[catId]);
+                  return `
+                    ${cat.title}: ${cand ? cand.name : 'לא נמצא'} 
+                    <button class="small-btn admin-action-btn" onclick="resetUserVote('${username}', '${catId}')" style="background:#dc2626;color:#fff;">
+                      הסר הצבעה
+                    </button>
+                  `;
+              }
+              return '';
+          }).filter(Boolean).join('<br>');
+      } else {
+          votesDetail = 'לא הצביע';
+      }
+
+      html += `<tr class="admin-user-row">
+        <td>${username}</td>
+        <td>${user.isAdmin ? 'אדמין' : 'רגיל'}</td>
+        <td style="font-size:12px;">${votesDetail}</td>
+        <td>
+          <button class="small-btn admin-action-btn" onclick="deleteUser('${username}')" style="background:#ef4444;color:#fff;">
+            מחק משתמש
+          </button>
+        </td>
+      </tr>`;
+  });
+  
+  html += `</tbody></table>`;
+  
+  els.adminContent.innerHTML = html;
+  window.scrollTo({ top: els.adminArea.offsetTop - 100, behavior: 'smooth' });
+}
+
+document.getElementById("closeAdmin").onclick = () => els.adminArea.classList.add("hidden");
+document.getElementById("closePanel").onclick = () => els.votePanel.classList.add("hidden");
+
+// Admin actions
+window.deleteUser = (username) => {
+    if (username === ADMIN_USERNAME) {
+        alert("לא ניתן למחוק את משתמש האדמין הראשי.");
+        return;
+    }
+    if(confirm(`בטוח למחוק את המשתמש ${username}? כל ההצבעות שלו יאופסו!`)){
+        // Decrement votes before deleting user
+        Object.keys(users[username].voted).forEach(catId => {
+            const candId = users[username].voted[catId];
+            if (candId && votes[catId] && votes[catId][candId]) {
+                votes[catId][candId]--;
+            }
+        });
+
+        delete users[username];
+        if (currentUser === username) {
+            currentUser = null;
+            localStorage.removeItem(LS_CURRENT);
+            updateAuthUI();
+        }
+        saveAll();
+        openAdminPanel();
+        alert(`משתמש ${username} נמחק.`);
+    }
+};
+
+window.resetUserVote = (username, catId) => {
+    if(confirm(`בטוח לאפס את ההצבעה של ${username} בקטגוריה ${DATA.find(d=>d.id===catId).title}?`)){
+        const votedCandId = users[username].voted[catId];
+        if (votedCandId && votes[catId] && votes[catId][votedCandId]) {
+            votes[catId][votedCandId]--;
+        }
+        delete users[username].voted[catId];
+        saveAll();
+        openAdminPanel();
+        renderCategories();
+        if(activeCategory && activeCategory.id === catId) renderCandidates();
+        alert(`הצבעת ${username} בקטגוריה זו אופסה.`);
+    }
+};
+
+document.getElementById("resetVotesBtn").onclick = () => {
+    if(confirm("פעולה הרסנית: האם לאפס את כל ההצבעות מכל המשתמשים? (המשתמשים יישארו)")) {
+        Object.keys(votes).forEach(catId => {
+            Object.keys(votes[catId]).forEach(candId => {
+                votes[catId][candId] = 0;
+            });
+        });
+
+        Object.keys(users).forEach(username => {
+            users[username].voted = {};
+        });
+
+        saveAll();
+        openAdminPanel();
+        renderCategories();
+        alert("כל ההצבעות אופסו בהצלחה.");
+    }
+};
+
+els.searchInput.addEventListener("input", (e) => renderCategories(e.target.value));
+
+// Init
+initVotesStructure();
+applyTheme(currentTheme);
+updateAuthUI();
+renderCategories();
+
+</script>
+</body>
+</html>
