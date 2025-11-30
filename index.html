@@ -283,39 +283,45 @@
 <script>
 /* DATA CONFIGURATION - FINAL AND CORRECTED */
 const DATA = [
-  { 
-    id: "cat_funny", title: "הכי מצחיק", desc: "מי הכי מצחיק בצ'אט השנה?", 
-    candidates: [
-      { id:"c1", name:"עידודוד", desc:"עידו המלך מכולם", image:"" },
-      { id:"c2", name:"מיכאל", desc:"אחלה גבר", image:"https://yt3.ggpht.com/WkJkhMfCiTKGt0uQo35aqV-uRa2hryLgN2HFbVQVAPMTJNauB9fRzKGLnxtCR26Catfcil-3TA=s600-c-k-c0x00ffffff-no-rj-rp-mo" }, 
-      { id:"c4", name:"ArielHatuka", desc:"גבר גבר וחתיך מעבר", image:"https://yt3.googleusercontent.com/Li6h3QYFl3j_11YXiVnWwNR6IN2zeeRiBQfpvvssUsrQkB9CdaUSlOvn-HpJN6toQObBQOuofw=s160-c-k-c0x00ffffff-no-rj" }, 
-      { id:"c5", name:"אוראלרצאבי", desc:"לא ממליץ לריב איתו", image:"" }, 
-      { id:"c3", name:"נתנאל", desc:"חמוד קטן", image:"https://upload.wikimedia.org/wikipedia/commons/7/7e/Roblox_Logo_2022.jpg" }
-      { id:"c3", name:"NoamB221", desc:" אני חייל של שלומי", image:"https://media.discordapp.net/attachments/1424061753695670353/1444698882528514192/image.png?ex=692da82e&is=692c56ae&hm=30a788f415fbefda0424679c15273ef6ab0d570635396f095884069864873057&=&format=webp&quality=lossless }
-    ]
-  },
-  { 
-    id: "cat_king", title: "הכי מלך", desc: "מי המלך של השנה?", 
-    candidates: [
-      { id:"c4", name:"ArielHatuka", desc:"גבר גבר וחתיך מעבר", image:"https://yt3.googleusercontent.com/Li6h3QYFl3j_11YXiVnWwNR6IN2zeeRiBQfpvvssUsrQkB9CdaUSlOvn-HpJN6toQObBQOuofw=s160-c-k-c0x00ffffff-no-rj" },
-      { id:"c5", name:"אוראלרצאבי", desc:"אומרים שלא כדי לריב איתו", image:"" },
-      { id:"c1", name:"עידודוד", desc:"עידו המלך מכולם", image:"" },
-      { id:"c2", name:"מיכאל", desc:"הכי מלך בצ'אט השנה", image:"https://yt3.ggpht.com/WkJkhMfCiTKGt0uQo35aqV-uRa2hryLgN2HFbVQVAPMTJNauB9fRzKGLnxtCR26Catfcil-3TA=s600-c-k-c0x00ffffff-no-rj-rp-mo" }, 
-      { id:"c7", name:"eden football", desc:"ספק מלך", image:"" }
-      { id:"c3", name:"NoamB221", desc:" אני חייל של שלומי", image:"https://media.discordapp.net/attachments/1424061753695670353/1444698882528514192/image.png?ex=692da82e&is=692c56ae&hm=30a788f415fbefda0424679c15273ef6ab0d570635396f095884069864873057&=&format=webp&quality=lossless }
-    ]
-    ]
-  },
-  { 
-    id: "cat_fight", title: "ריב השנה", desc: "האירוע הדרמטי של השנה", 
-    candidates: [
-      { id:"f1", name:"אוראלרצאבי vs הצ'אט", desc:"תמיד רב אבל תמיד נשאר המלך מכולם ", image:"" },
-      { id:"f2", name:"מיכאל ועידו vs נתנאל", desc:"ריב בדיסקורד אומרים שעד היום לא נגמר", image:"https://yt3.ggpht.com/WkJkhMfCiTKGt0uQo35aqV-uRa2hryLgN2HFbVQVAPMTJNauB9fRzKGLnxtCR26Catfcil-3TA=s600-c-k-c0x00ffffff-no-rj-rp-mo" }, 
-      { id:"f3", name:"SL מתעצבן", desc:"בעיקרון לא כדי כי אחרי זה תקבל באן...", image:"https://yt3.googleusercontent.com/LOfXo_Zd02pBNHcBO-7fGP4GAs0aeqF6HADBRY_zA8f7FxX_h7gpcQy-mxcHktx1X0h-cMOpHIg=s72-c-k-c0x00ffffff-no-rj" } 
-    ]
-  }
-];
+  {  
+    id: "cat_funny",
+    title: "הכי מצחיק",
+    desc: "מי הכי מצחיק בצ'אט השנה?",
+    candidates: [
+      { id:"c1", name:"עידודוד", desc:"עידו המלך מכולם", image:"" },
+      { id:"c2", name:"מיכאל", desc:"אחלה גבר", image:"https://yt3.ggpht.com/WkJkhMfCiTKGt0uQo35aqV-uRa2hryLgN2HFbVQVAPMTJNauB9fRzKGLnxtCR26Catfcil-3TA=s600-c-k-c0x00ffffff-no-rj-rp-mo" }, 
+      { id:"c4", name:"ArielHatuka", desc:"גבר גבר וחתיך מעבר", image:"https://yt3.googleusercontent.com/Li6h3QYFl3j_11YXiVnWwNR6IN2zeeRiBQfpvvssUsrQkB9CdaUSlOvn-HpJN6toQObBQOuofw=s160-c-k-c0x00ffffff-no-rj" }, 
+      { id:"c5", name:"אוראלרצאבי", desc:"לא ממליץ לריב איתו", image:"" }, 
+      { id:"c3", name:"נתנאל", desc:"חמוד קטן", image:"https://upload.wikimedia.org/wikipedia/commons/7/7e/Roblox_Logo_2022.jpg" },
+      { id:"c6", name:"NoamB221", desc:"אני חייל של שלומי", image:"https://media.discordapp.net/attachments/1424061753695670353/1444698882528514192/image.png?ex=692da82e&is=692c56ae&hm=30a788f415fbefda0424679c15273ef6ab0d570635396f095884069864873057&=&format=webp&quality=lossless" }
+    ]
+  },
 
+  {  
+    id: "cat_king",
+    title: "הכי מלך",
+    desc: "מי המלך של השנה?",
+    candidates: [
+      { id:"c4", name:"ArielHatuka", desc:"גבר גבר וחתיך מעבר", image:"https://yt3.googleusercontent.com/Li6h3QYFl3j_11YXiVnWwNR6IN2zeeRiBQfpvvssUsrQkB9CdaUSlOvn-HpJN6toQObBQOuofw=s160-c-k-c0x00ffffff-no-rj" },
+      { id:"c5", name:"אוראלרצאבי", desc:"אומרים שלא כדאי לריב איתו", image:"" },
+      { id:"c1", name:"עידודוד", desc:"עידו המלך מכולם", image:"" },
+      { id:"c2", name:"מיכאל", desc:"הכי מלך בצ'אט השנה", image:"https://yt3.ggpht.com/WkJkhMfCiTKGt0uQo35aqV-uRa2hryLgN2HFbVQVAPMTJNauB9fRzKGLnxtCR26Catfcil-3TA=s600-c-k-c0x00ffffff-no-rj-rp-mo" }, 
+      { id:"c7", name:"eden football", desc:"ספק מלך", image:"" },
+      { id:"c6", name:"NoamB221", desc:"אני חייל של שלומי", image:"https://media.discordapp.net/attachments/1424061753695670353/1444698882528514192/image.png?ex=692da82e&is=692c56ae&hm=30a788f415fbefda0424679c15273ef6ab0d570635396f095884069864873057&=&format=webp&quality=lossless" }
+    ]
+  },
+
+  {  
+    id: "cat_fight",
+    title: "ריב השנה",
+    desc: "האירוע הדרמטי של השנה",
+    candidates: [
+      { id:"f1", name:"אוראלרצאבי vs הצ'אט", desc:"תמיד רב אבל תמיד נשאר המלך מכולם", image:"" },
+      { id:"f2", name:"מיכאל ועידו vs נתנאל", desc:"ריב בדיסקורד אומרים שעד היום לא נגמר", image:"https://yt3.ggpht.com/WkJkhMfCiTKGt0uQo35aqV-uRa2hryLgN2HFbVQVAPMTJNauB9fRzKGLnxtCR26Catfcil-3TA=s600-c-k-c0x00ffffff-no-rj-rp-mo" }, 
+      { id:"f3", name:"SL מתעצבן", desc:"בעיקרון לא כדאי כי אחרי זה תקבל באן...", image:"https://yt3.googleusercontent.com/LOfXo_Zd02pBNHcBO-7fGP4GAs0aeqF6HADBRY_zA8f7FxX_h7gpcQy-mxcHktx1X0h-cMOpHIg=s72-c-k-c0x00ffffff-no-rj" } 
+    ]
+  }
+];
 // --- CONSTANTS ---
 const ADMIN_PASSCODE = "ADMINSL"; 
 const ADMIN_USERNAME = "admin";
